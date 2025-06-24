@@ -5,25 +5,35 @@ import java.util.stream.Collectors;
 
 public class OrderAnalyzer {
 
-
-    public List<String> getUniqueCities(List<Order> orders) {
+    public Set<String> getUniqueCities(List<Order> orders) {
+        if (orders == null) {
+            return Collections.emptySet();
+        }
         return orders.stream()
+                .filter(order -> order != null && order.getCustomer() != null)
                 .map(order -> order.getCustomer().getCity())
-                .filter(Objects::nonNull)
                 .distinct()
-                .collect(Collectors.toList());
+                .filter(Objects::nonNull)
+                .collect(Collectors.toSet());
     }
 
     public double getTotalIncome(List<Order> orders) {
+        if (orders == null) {
+            return 0.0;
+        }
         return orders.stream()
-                .filter(order -> order.getStatus() == OrderStatus.DELIVERED)
+                .filter(order -> order != null && order.getStatus() == OrderStatus.DELIVERED && order.getItems() != null)
                 .flatMap(order -> order.getItems().stream())
                 .mapToDouble(item -> item.getPrice() * item.getQuantity())
                 .sum();
     }
 
     public Optional<String> getMostPopularProduct(List<Order> orders) {
+        if (orders == null) {
+            return Optional.empty();
+        }
         return orders.stream()
+                .filter(order -> order != null && order.getItems() != null)
                 .flatMap(order -> order.getItems().stream())
                 .collect(Collectors.groupingBy(
                         OrderItem::getProductName,
@@ -34,8 +44,11 @@ public class OrderAnalyzer {
     }
 
     public double getAverageOrderValue(List<Order> orders) {
+        if (orders == null) {
+            return 0.0;
+        }
         return orders.stream()
-                .filter(order -> order.getStatus() == OrderStatus.DELIVERED)
+                .filter(order -> order != null && order.getStatus() == OrderStatus.DELIVERED && order.getItems() != null)
                 .mapToDouble(order -> order.getItems().stream()
                         .mapToDouble(item -> item.getPrice() * item.getQuantity())
                         .sum())
@@ -44,7 +57,11 @@ public class OrderAnalyzer {
     }
 
     public List<Customer> getCustomersWithMoreThanFiveOrders(List<Order> orders) {
+        if (orders == null) {
+            return Collections.emptyList();
+        }
         return orders.stream()
+                .filter(order -> order != null && order.getCustomer() != null)
                 .collect(Collectors.groupingBy(
                         Order::getCustomer,
                         Collectors.counting()))

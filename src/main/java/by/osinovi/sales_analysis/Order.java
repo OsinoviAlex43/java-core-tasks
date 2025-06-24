@@ -11,6 +11,14 @@ public class Order {
     private List<OrderItem> items;
     private OrderStatus status;
 
+    public Order(String orderId, LocalDateTime orderDate, Customer customer, List<OrderItem> items, OrderStatus status) {
+        this.orderId = orderId;
+        this.orderDate = orderDate;
+        this.customer = customer;
+        this.items = items;
+        this.status = status;
+    }
+
     public String getOrderId() {
         return orderId;
     }

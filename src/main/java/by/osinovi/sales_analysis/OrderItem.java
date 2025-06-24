@@ -8,6 +8,13 @@ public class OrderItem {
     private double price;
     private Category category;
 
+    public OrderItem(String productName, int quantity, double price, Category category) {
+        this.productName = productName;
+        this.quantity = quantity;
+        this.price = price;
+        this.category = category;
+    }
+
     public String getProductName() {
         return productName;
     }
