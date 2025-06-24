@@ -31,17 +31,13 @@ public class OrderAnalyzerTest {
 
         List<Order> testOrders = new ArrayList<>();
 
-        // Заказ 1: Доставлен
         testOrders.add(new Order("O1", LocalDateTime.now(), customer1, Arrays.asList(item1, item2), OrderStatus.DELIVERED));
-        // Заказ 2: Доставлен
         testOrders.add(new Order("O2", LocalDateTime.now(), customer2, Arrays.asList(item3), OrderStatus.DELIVERED));
-        // Заказ 3: Отменен
         testOrders.add(new Order("O3", LocalDateTime.now(), customer1, Arrays.asList(item4), OrderStatus.CANCELLED));
-        // Заказы для customer1 (чтобы было больше 5 заказов)
+
         for (int i = 4; i <= 8; i++) {
             testOrders.add(new Order("O" + i, LocalDateTime.now(), customer1, Arrays.asList(item4), OrderStatus.DELIVERED));
         }
-        // Заказ для customer3
         testOrders.add(new Order("O9", LocalDateTime.now(), customer3, Arrays.asList(item4), OrderStatus.DELIVERED));
 
         return testOrders;
@@ -110,7 +106,7 @@ public class OrderAnalyzerTest {
     void testGetMostPopularProduct() {
         Optional<String> mostPopular = analyzer.getMostPopularProduct(orders);
         assertTrue(mostPopular.isPresent());
-        assertEquals("Book", mostPopular.get()); // 3 + 2*5 = 13 единиц Book vs 3 единицы Laptop
+        assertEquals("Book", mostPopular.get());
     }
 
     @Test
@@ -128,7 +124,6 @@ public class OrderAnalyzerTest {
     @Test
     void testGetAverageOrderValue() {
         double avgOrderValue = analyzer.getAverageOrderValue(orders);
-        // Сумма: 3260, заказов: 7, среднее: 3260 / 7 ≈ 465.714
         assertEquals(412.5, avgOrderValue, 0.01);
     }
 
