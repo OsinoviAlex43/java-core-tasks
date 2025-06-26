@@ -15,7 +15,7 @@ class Factory implements Runnable {
         this.inventory = inventory;
         this.lock = lock;
         this.condition = condition;
-        this.random = new Random(42); // Фиксированный сид для воспроизводимости
+        this.random = new Random();
         this.days = days;
     }
 
@@ -24,24 +24,23 @@ class Factory implements Runnable {
         for (int day = 1; day <= days; day++) {
             lock.lock();
             try {
-                // Производим 10 деталей
                 for (int i = 0; i < 10; i++) {
                     PartType part = PartType.values()[random.nextInt(PartType.values().length)];
                     inventory.addPart(part);
                 }
                 System.out.printf("День %d: Фабрика произвела %s%n", day, inventory);
-                condition.signalAll(); // Сигнал фракциям
+                condition.signalAll();
             } finally {
                 lock.unlock();
             }
             try {
-                Thread.sleep(100); // Имитация времени дня
+                Thread.sleep(100);
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
             }
             lock.lock();
             try {
-                condition.signalAll(); // Финальный сигнал для разблокировки фракций
+                condition.signalAll();
             } finally {
                 lock.unlock();
             }

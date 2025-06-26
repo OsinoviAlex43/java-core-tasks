@@ -33,8 +33,7 @@ public class Faction implements Runnable {
         for (int day = 1; day <= days; day++) {
             lock.lock();
             try {
-                condition.await(); // Ждем сигнала от Фабрики
-                // Забираем до 5 деталей
+                condition.await();
                 int partsTaken = 0;
                 List<PartType> availableParts = Arrays.stream(PartType.values())
                         .filter(part -> factoryInventory.getPartCount(part) > 0)
