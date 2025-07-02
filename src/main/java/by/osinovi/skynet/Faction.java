@@ -48,7 +48,7 @@ public class Faction implements Runnable {
                             .filter(par -> factoryInventory.getPartCount(part) > 0)
                             .toList();
                 }
-                // Собираем роботов
+
                 while (factionInventory.canAssembleRobot()) {
                     factionInventory.assembleRobot();
                     robots++;
