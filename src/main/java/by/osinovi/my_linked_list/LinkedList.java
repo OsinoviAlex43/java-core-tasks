@@ -1,7 +1,7 @@
 package by.osinovi.my_linked_list;
 
 public class LinkedList<T> {
-    private static class Node<T> {  // Добавлен параметр типа T для Node
+    private static class Node<T> {
         T data;
         Node<T> next;
 
@@ -11,7 +11,7 @@ public class LinkedList<T> {
         }
     }
 
-    private Node<T> head;  // Изменен тип head на Node<T>
+    private Node<T> head;
     private int size;
 
     public LinkedList() {
@@ -24,14 +24,14 @@ public class LinkedList<T> {
     }
 
     public void addFirst(T element) {
-        Node<T> newNode = new Node<>(element);  // Используем Node<T>
+        Node<T> newNode = new Node<>(element);
         newNode.next = head;
         head = newNode;
         size++;
     }
 
     public void addLast(T element) {
-        Node<T> newNode = new Node<>(element);  // Используем Node<T>
+        Node<T> newNode = new Node<>(element);
         if (head == null) {
             head = newNode;
         } else {
@@ -52,7 +52,7 @@ public class LinkedList<T> {
             addFirst(element);
             return;
         }
-        Node<T> newNode = new Node<>(element);  // Используем Node<T>
+        Node<T> newNode = new Node<>(element);
         Node<T> current = head;
         for (int i = 0; i < index - 1; i++) {
             current = current.next;
