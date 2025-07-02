@@ -1,7 +1,8 @@
 import by.osinovi.my_linked_list.LinkedList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class LinkedListTest {
     private LinkedList<Integer> list;

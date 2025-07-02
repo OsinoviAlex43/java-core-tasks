@@ -1,9 +1,9 @@
 package by.osinovi.my_linked_list;
 
 public class LinkedList<T> {
-    private class Node {
+    private static class Node<T> {  // Добавлен параметр типа T для Node
         T data;
-        Node next;
+        Node<T> next;
 
         public Node(T data) {
             this.data = data;
@@ -11,7 +11,7 @@ public class LinkedList<T> {
         }
     }
 
-    private Node head;
+    private Node<T> head;  // Изменен тип head на Node<T>
     private int size;
 
     public LinkedList() {
@@ -24,18 +24,18 @@ public class LinkedList<T> {
     }
 
     public void addFirst(T element) {
-        Node newNode = new Node(element);
+        Node<T> newNode = new Node<>(element);  // Используем Node<T>
         newNode.next = head;
         head = newNode;
         size++;
     }
 
     public void addLast(T element) {
-        Node newNode = new Node(element);
+        Node<T> newNode = new Node<>(element);  // Используем Node<T>
         if (head == null) {
             head = newNode;
         } else {
-            Node current = head;
+            Node<T> current = head;
             while (current.next != null) {
                 current = current.next;
             }
@@ -52,8 +52,8 @@ public class LinkedList<T> {
             addFirst(element);
             return;
         }
-        Node newNode = new Node(element);
-        Node current = head;
+        Node<T> newNode = new Node<>(element);  // Используем Node<T>
+        Node<T> current = head;
         for (int i = 0; i < index - 1; i++) {
             current = current.next;
         }
@@ -73,7 +73,7 @@ public class LinkedList<T> {
         if (head == null) {
             throw new IllegalStateException("List is empty");
         }
-        Node current = head;
+        Node<T> current = head;
         while (current.next != null) {
             current = current.next;
         }
@@ -84,7 +84,7 @@ public class LinkedList<T> {
         if (index < 0 || index >= size) {
             throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + size);
         }
-        Node current = head;
+        Node<T> current = head;
         for (int i = 0; i < index; i++) {
             current = current.next;
         }
@@ -111,7 +111,7 @@ public class LinkedList<T> {
             size--;
             return data;
         }
-        Node current = head;
+        Node<T> current = head;
         while (current.next.next != null) {
             current = current.next;
         }
@@ -128,7 +128,7 @@ public class LinkedList<T> {
         if (index == 0) {
             return removeFirst();
         }
-        Node current = head;
+        Node<T> current = head;
         for (int i = 0; i < index - 1; i++) {
             current = current.next;
         }
@@ -138,6 +138,3 @@ public class LinkedList<T> {
         return data;
     }
 }
-
-
-
