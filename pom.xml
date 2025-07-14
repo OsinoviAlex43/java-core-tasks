@@ -15,8 +15,11 @@
     </properties>
 
     <dependencies>
+
+
         <dependency>
             <groupId>org.junit.jupiter</groupId>
+
             <artifactId>junit-jupiter</artifactId>
             <version>5.9.1</version>
             <scope>test</scope>
@@ -27,6 +30,8 @@
             <version>1.18.38</version>
             <scope>provided</scope>
         </dependency>
+
+
     </dependencies>
 
 </project>
